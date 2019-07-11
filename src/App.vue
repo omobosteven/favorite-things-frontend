@@ -2,11 +2,29 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/things">Favorite things</router-link> |
+      <router-link to="/logs">Logs</router-link> |
+      <router-link to="/auth" v-if="!isAuthenticated">Login</router-link>
+      <b-button v-if="isAuthenticated"
+                @click="logoutUser"
+                id="logoutBtn">Logout
+      </b-button>
+
     </div>
     <router-view/>
   </div>
 </template>
+d
+<script>
+import { mapState, mapActions } from 'vuex';
+
+export default {
+  computed: mapState(['isAuthenticated']),
+  methods: {
+    ...mapActions(['logoutUser']),
+  },
+};
+</script>
 
 <style>
 #app {
@@ -27,5 +45,18 @@
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+#logoutBtn {
+  padding: 1px 10px;
+  background-color: #b96346;
+}
+
+#logoutBtn:hover {
+  background-color: #a95545;
+}
+
+.error-msg {
+  color: #dc3545;
 }
 </style>
