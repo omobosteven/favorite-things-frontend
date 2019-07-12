@@ -16,9 +16,13 @@ import store from './store';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
+const baseUrl = process.env.NODE_ENV === 'production'
+  ? 'http://ec2-18-191-69-218.us-east-2.compute.amazonaws.com:8000/'
+  : 'http://127.0.0.1:8000/';
+
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-axios.defaults.baseURL = 'http://18.191.69.218:8000/';
+axios.defaults.baseURL = baseUrl;
 axios.defaults.withCredentials = true;
 
 library.add(faCircle, faSquare, faPlusCircle);

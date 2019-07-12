@@ -205,10 +205,10 @@ export default {
     addMetadataField() {
       const field = document.getElementById('favorite-thing-form');
       const { mkey, mvalue } = field;
-      const mkeyValue = mkey.value;
-      const mvalueValue = mvalue.value;
+      const mkeyValue = mkey.value.trim();
+      const mvalueValue = mvalue.value.trim();
 
-      if (mkeyValue == false || mvalueValue == false) {
+      if (mkeyValue === '' || mvalueValue === '') {
         this.errors = {
           ...this.errors,
           metadata: ['This field(key/value) may not be blank'],
@@ -241,9 +241,10 @@ export default {
         });
     },
     goBack() {
-      window.history.length > 1
+      const goBack = window.history.length > 1
         ? this.$router.go(-1)
         : this.$router.push('/');
+      goBack();
     },
   },
   watch: {
